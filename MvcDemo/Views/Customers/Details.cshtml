@@ -1,0 +1,18 @@
+﻿@model MvcDemo.Models.Customer
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Model.Name</h2>
+<ul>
+    @if (Model.Birthdate != null)
+    {
+        <li>Birthdate: @Model.Birthdate.Value.ToShortDateString()</li>
+    }
+    <li>Customer Since: @Model.JoinedAt.ToShortDateString()</li>
+    <li>Favorite Movie: @Model.FavoriteMovie</li>
+    <li>Membership Type: @Model.MembershipType.Name</li>
+    <li>Discount Rate: @Model.MembershipType.DiscountRate%</li>
+</ul>
+

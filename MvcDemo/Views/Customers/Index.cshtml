@@ -1,0 +1,44 @@
+﻿@model MvcDemo.ViewModels.CustomerViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Customers</h2>
+
+@if (Model.Customers.Count == 0)
+{
+    <p>We have no customers yet.</p>
+}
+else
+{
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Join Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var customer in Model.Customers)
+            {
+                <tr data-id="@customer.Id">
+                    <td>@customer.Name</td>
+                    <td>@customer.JoinedAt.Date.ToShortDateString()</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@section scripts {
+    <script>
+        const rows = document.querySelectorAll("tr");
+        rows.forEach(r => {
+            r.addEventListener("click", e => {
+                const id = e.currentTarget.dataset.id;
+                window.location.href = `https://localhost:44302/customers/details/${id}`;
+            })
+        })
+    </script>
+} 
